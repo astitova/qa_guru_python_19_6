@@ -31,10 +31,11 @@ def test_dark_theme_by_time_and_user_choice():
         is_dark_theme = True
     elif dark_theme_enabled_by_user is False:
         is_dark_theme = False
-    elif current_time >= time(hour=22) or current_time < time(hour=6):
-        is_dark_theme = True
     else:
-        is_dark_theme = False
+        if dark_theme_enabled_by_user is None and (current_time >= time(hour=22) or current_time < time(hour=6)):
+            is_dark_theme = True
+        else:
+            is_dark_theme = False
 
     assert is_dark_theme is True
 
