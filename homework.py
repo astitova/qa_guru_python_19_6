@@ -27,11 +27,13 @@ def test_dark_theme_by_time_and_user_choice():
     current_time = time(hour=16)
     dark_theme_enabled_by_user = True
 
-    if current_time >= time(hour=22) or current_time < time(hour=6):
-        is_dark_theme = True
-    elif dark_theme_enabled_by_user is True:
+    if dark_theme_enabled_by_user is True:
         is_dark_theme = True
     elif dark_theme_enabled_by_user is False:
+        is_dark_theme = False
+    elif current_time >= time(hour=22) or current_time < time(hour=6):
+        is_dark_theme = True
+    else:
         is_dark_theme = False
 
     assert is_dark_theme is True
@@ -52,7 +54,8 @@ def test_find_suitable_user():
     suitable_users = []
     for user in users:
         if user['name'] == 'Olga':
-            return suitable_users
+            suitable_users = user
+            break
 
     assert suitable_users == {"name": "Olga", "age": 45}
 
